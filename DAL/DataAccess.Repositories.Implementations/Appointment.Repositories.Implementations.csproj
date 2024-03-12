@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess.Context\Appointment.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\Appointment.EntityFramework\Appointment.EntityFramework.csproj" />
     <ProjectReference Include="..\DataAccess.Entities\Appointment.Entities.csproj" />
     <ProjectReference Include="..\DataAccess.Repositories.Abstractions\Appointment.Repositories.Abstractions.csproj" />
   </ItemGroup>

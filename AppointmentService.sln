@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appointment.Repositories.Im
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appointment.Service", "Appointment.Service\Appointment.Service.csproj", "{68D09D74-57A2-436F-B2DF-6D6F1651D584}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointment.EntityFramework", "Appointment.EntityFramework\Appointment.EntityFramework.csproj", "{07762A52-5D57-4CC9-B1C3-821F32479974}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{68D09D74-57A2-436F-B2DF-6D6F1651D584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68D09D74-57A2-436F-B2DF-6D6F1651D584}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68D09D74-57A2-436F-B2DF-6D6F1651D584}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07762A52-5D57-4CC9-B1C3-821F32479974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07762A52-5D57-4CC9-B1C3-821F32479974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07762A52-5D57-4CC9-B1C3-821F32479974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07762A52-5D57-4CC9-B1C3-821F32479974}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

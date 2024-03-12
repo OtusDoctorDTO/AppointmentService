@@ -55,9 +55,7 @@ namespace BusinessLogic.Services
         public async Task<Guid> CreateAsync(CreatingAppointmentDto creatingAppointmentDto)
         {
             var appointment = _mapper.Map<CreatingAppointmentDto, Appointment.Entities.Appointment>(creatingAppointmentDto);
-            var createdAppointment = await appointmentRepository.AddAsync(appointment);
-            await appointmentRepository.SaveChangesAsync();
-            return createdAppointment.Id;
+            return await appointmentRepository.AddAsync(appointment);
         }
 
         /// <summary>
@@ -77,8 +75,7 @@ namespace BusinessLogic.Services
             appointment.DoctorId = updatingAppointmentDto.DoctorId;
             appointment.PatientId = updatingAppointmentDto.PatientId;
             appointment.Status = (int)updatingAppointmentDto.Status;
-            appointmentRepository.Update(appointment);
-            await appointmentRepository.SaveChangesAsync();
+            await appointmentRepository.Update(appointment);
         }
 
         /// <summary>
@@ -87,11 +84,7 @@ namespace BusinessLogic.Services
         /// <param name="id">Идентификатор</param>
         public async Task DeleteAsync(Guid id)
         {
-            var appointment = await appointmentRepository.GetAsync(id);
-            if (appointment == null)
-                throw new Exception($"Запись с идентфикатором {id} не найдена");
-            appointment.IsDeleted = true;
-            await appointmentRepository.SaveChangesAsync();
+            await appointmentRepository.DeleteAsync(id);
         }
     }
 }

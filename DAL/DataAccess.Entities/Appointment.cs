@@ -5,7 +5,7 @@ namespace Appointment.Entities
     /// <summary>
     /// Курс
     /// </summary>
-    public class Appointment: IEntity<Guid>
+    public class Appointment
     {
         /// <summary>
         /// Идентификатор
