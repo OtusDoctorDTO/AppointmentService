@@ -8,6 +8,8 @@ using BusinessLogic.Abstractions;
 using BusinessLogic.Services;
 using BusinessLogic.Services.Mapping;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Transactions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,8 +26,14 @@ builder.Services.AddSingleton<IMapper>(new Mapper(new MapperConfiguration(cfg =>
     cfg.AddProfile<AppointmentMappingsProfile>();
 
 })));
+
+string connection = configuration!.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connection))
+    throw new ConfigurationException("Не удалось прочитать строку подключения");
+
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+
 builder.Services.AddTransient<IAppointmentService, AppointmentService>();
-builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddTransient<IMessageLogic, MessageLogic>();
 // Add services to the container.
@@ -68,7 +76,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
