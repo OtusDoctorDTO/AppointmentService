@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Appointment.Repositories
 {
     /// <summary>
-    /// Репозиторий работы с курсами.
+    /// Репозиторий работы с записями.
     /// </summary>
     public class AppointmentRepository : IAppointmentRepository
     {

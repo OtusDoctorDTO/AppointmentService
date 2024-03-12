@@ -24,9 +24,8 @@ builder.Services.AddSingleton<IMapper>(new Mapper(new MapperConfiguration(cfg =>
     cfg.AddProfile<AppointmentMappingsProfile>();
 
 })));
-builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddTransient<IAppointmentService, AppointmentService>();
 builder.Services.AddDbContext<DatabaseContext>();
-builder.Services.AddTransient<IRabitMQProducer, RabitMQProducer>();
 builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddTransient<IMessageLogic, MessageLogic>();
 // Add services to the container.
@@ -36,11 +35,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMassTransit(x =>
 {
-    //x
-    //.AddRequestManagerConsumerType<IAuthResponse>()
-    //.AddRequestManagerConsumerType<IUnifiedReceptionResponse>()
-    //.AddConsumers();
-
     x.AddConsumer<BaseConsumer>();
 
 

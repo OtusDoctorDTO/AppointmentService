@@ -1,5 +1,4 @@
-﻿using Appointment.Service.Models;
-using BusinessLogic.Abstractions;
+﻿using BusinessLogic.Abstractions;
 using BusinessLogic.Contracts.Appointment;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +9,9 @@ namespace Appointment.Service.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _appointmentService;
-        private readonly IRabitMQProducer _rabitMQProducer;
-        public AppointmentController(IAppointmentService appointmentService, IRabitMQProducer rabitMQProducer)
+        public AppointmentController(IAppointmentService appointmentService)
         {
             _appointmentService = appointmentService;
-            _rabitMQProducer = rabitMQProducer;
         }
         [HttpGet("GetPaged")]
         public async Task<IEnumerable<AppointmentDto>> AppointmentList(int page, int pageSize)
@@ -29,14 +26,25 @@ namespace Appointment.Service.Controllers
         [HttpPost("AddAppointment")]
         public async Task AddAppointment(CreatingAppointmentDto appointment)
         {
+            await _appointmentService.CreateAsync(appointment);
         }
         [HttpPut("updateAppointment")]
-        public async Task UpdateAppointment()
+        public async Task UpdateAppointment(Guid id, UpdatingAppointmentDto appointment)
         {
+            await _appointmentService.UpdateAsync(id, appointment);
         }
         [HttpDelete("deleteAppointment")]
-        public async Task<bool> DeleteAppointment(int Id)
+        public async Task<bool> DeleteAppointment(Guid id)
         {
+            try
+            {
+                await _appointmentService.DeleteAsync(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                // Логи
+            }
             return false;
         }
     }
