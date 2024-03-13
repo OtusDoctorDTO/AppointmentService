@@ -1,4 +1,5 @@
-﻿using Appointment.Repositories;
+﻿using Appointment.Entities;
+using Appointment.Repositories;
 using AutoMapper;
 using BusinessLogic.Abstractions;
 using BusinessLogic.Contracts.Appointment;
@@ -55,6 +56,7 @@ namespace BusinessLogic.Services
         public async Task<Guid> CreateAsync(CreatingAppointmentDto creatingAppointmentDto)
         {
             var appointment = _mapper.Map<CreatingAppointmentDto, Appointment.Entities.Appointment>(creatingAppointmentDto);
+            appointment.Status = (int)StatusEnum.Waiting;
             return await appointmentRepository.AddAsync(appointment);
         }
 

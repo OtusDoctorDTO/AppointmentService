@@ -20,6 +20,7 @@ namespace Appointment.Repositories
 
         public async Task<Guid> AddAsync(Entities.Appointment appointment)
         {
+            appointment.CreateDate = DateTime.Now;
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
             return appointment.Id;
