@@ -4,7 +4,7 @@ using BusinessLogic.Contracts.Appointment;
 namespace BusinessLogic.Services.Mapping
 {
     /// <summary>
-    /// Профиль автомаппера для сущности курса.
+    /// Профиль автомаппера для сущности записи.
     /// </summary>
     public class AppointmentMappingsProfile : Profile
     {

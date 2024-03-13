@@ -7,36 +7,36 @@ using BusinessLogic.Contracts.Appointment;
 namespace BusinessLogic.Abstractions
 {
     /// <summary>
-    /// Cервис работы с курсами (интерфейс)
+    /// Cервис работы с записями (интерфейс)
     /// </summary>
     public interface IAppointmentService
     {
         /// <summary>
-        /// Получить список курсов.
+        /// Получить список записей
         /// </summary>
         /// <param name="page">Номер страницы</param>
         /// <param name="pageSize">Объем страницы</param>
-        /// <returns>Список курсов</returns>
+        /// <returns>Список записей</returns>
         Task<ICollection<AppointmentDto>> GetPagedAsync(int page, int pageSize);
 
         /// <summary>
         /// Получить запись
         /// </summary>
         /// <param name="id">Идентификатор</param>
-        /// <returns>ДТО курса</returns>
+        /// <returns>ДТО записи</returns>
         Task<AppointmentDto> GetByIdAsync(Guid id);
 
         /// <summary>
         /// Создать запись
         /// </summary>
-        /// <param name="creatingAppointmentDto">ДТО создаваемого курса</param>
+        /// <param name="creatingAppointmentDto">ДТО создаваемой записи</param>
         Task<Guid> CreateAsync(CreatingAppointmentDto creatingAppointmentDto);
 
         /// <summary>
         /// Изменить запись
         /// </summary>
         /// <param name="id">Иентификатор</param>
-        /// <param name="updatingAppointmentDto">ДТО редактируемого курса</param>
+        /// <param name="updatingAppointmentDto">ДТО редактируемой записи</param>
         Task UpdateAsync(Guid id, UpdatingAppointmentDto updatingAppointmentDto);
 
         /// <summary>

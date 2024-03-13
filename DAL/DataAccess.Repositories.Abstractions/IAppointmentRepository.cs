@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Appointment.Repositories
 {
     /// <summary>
-    /// Интерфейс репозитория работы с курсами.
+    /// Интерфейс репозитория работы с записями
     /// </summary>
     public interface IAppointmentRepository
     {

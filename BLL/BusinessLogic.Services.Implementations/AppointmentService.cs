@@ -25,11 +25,11 @@ namespace BusinessLogic.Services
         }
 
         /// <summary>
-        /// Получить список курсов.
+        /// Получить список записей.
         /// </summary>
         /// <param name="page">Номер страницы</param>
         /// <param name="pageSize">Объем страницы</param>
-        /// <returns>Список курсов</returns>
+        /// <returns>Список записей</returns>
         public async Task<ICollection<AppointmentDto>> GetPagedAsync(int page, int pageSize)
         {
             var entities = await appointmentRepository.GetPagedAsync(page, pageSize);
@@ -40,7 +40,7 @@ namespace BusinessLogic.Services
         /// Получить запись
         /// </summary>
         /// <param name="id">Идентификатор</param>
-        /// <returns>ДТО курса</returns>
+        /// <returns>ДТО записи</returns>
         public async Task<AppointmentDto> GetByIdAsync(Guid id)
         {
             var appointment = await appointmentRepository.GetAsync(id);
@@ -50,7 +50,7 @@ namespace BusinessLogic.Services
         /// <summary>
         /// Создать запись
         /// </summary>
-        /// <param name="creatingAppointmentDto">ДТО создаваемого курса</param>
+        /// <param name="creatingAppointmentDto">ДТО создаваемой записи</param>
         /// <returns>Идентификатор</returns>
         public async Task<Guid> CreateAsync(CreatingAppointmentDto creatingAppointmentDto)
         {
@@ -62,7 +62,7 @@ namespace BusinessLogic.Services
         /// Изменить запись
         /// </summary>
         /// <param name="id">Идентификатор</param>
-        /// <param name="updatingAppointmentDto">ДТО редактируемого курса</param>
+        /// <param name="updatingAppointmentDto">ДТО редактируемой записи</param>
         public async Task UpdateAsync(Guid id, UpdatingAppointmentDto updatingAppointmentDto)
         {
             var appointment = await appointmentRepository.GetAsync(id);

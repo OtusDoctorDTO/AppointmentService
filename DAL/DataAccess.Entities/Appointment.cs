@@ -3,7 +3,7 @@
 namespace Appointment.Entities
 {
     /// <summary>
-    /// Курс
+    /// Запись
     /// </summary>
     public class Appointment
     {
