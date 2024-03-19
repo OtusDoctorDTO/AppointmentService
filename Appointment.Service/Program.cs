@@ -2,14 +2,12 @@ using Appointment.EntityFramework;
 using Appointment.Repositories;
 using Appointment.Service.Configs;
 using Appointment.Service.Consumers;
-using Appointment.Service.Models;
 using AutoMapper;
 using BusinessLogic.Abstractions;
 using BusinessLogic.Services;
 using BusinessLogic.Services.Mapping;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System.Transactions;
 
 var builder = WebApplication.CreateBuilder(args);
