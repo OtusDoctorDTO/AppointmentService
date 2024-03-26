@@ -1,6 +1,4 @@
-﻿using Appointment.Service.Models;
-
-namespace Appointment.Service.Consumers
+﻿namespace Appointment.Service.Consumers
 {
     public interface IMessageLogic
     {
