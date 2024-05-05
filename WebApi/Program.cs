@@ -25,13 +25,13 @@ namespace WebApi
         public static void Main(string[] args)
         {
 
-            // команда для создания нужного контейнера
-            // docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
+            // команда для создания контейнеров
+            // docker compose up -d
             var builder = WebApplication.CreateBuilder(args);
             IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile("appsettings.Development.json", true)
+                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
                 .Build();
 
             if (configuration.Get<ApplicationConfig>() is not IApplicationConfig receptionConfig)
