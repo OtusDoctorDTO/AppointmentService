@@ -24,8 +24,7 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-
-            // команда для создания контейнеров
+            // Command for creating containers
             // docker compose up -d
             var builder = WebApplication.CreateBuilder(args);
             IConfiguration configuration = new ConfigurationBuilder()
