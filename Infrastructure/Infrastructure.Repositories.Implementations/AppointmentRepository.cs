@@ -84,5 +84,18 @@ namespace Infrastructure.Repositories.Implementations
             }
             return true;
         }
+
+        public async Task<List<Appointment>> GetByParametersAsync(DateTime? sinceDate = null, DateTime? forDate = null, int[] statuses = null, int? count = null)
+        {
+            var result = await _context.Appointments.Where(appointment =>
+            (sinceDate == null || appointment.Time > sinceDate!.Value) &&
+            (forDate == null || appointment.Time <= forDate!.Value) &&
+            ((statuses == null || !statuses.Any()) || statuses.Contains(appointment.Status)))
+                .OrderByDescending(x => x.CreateDate)
+                .ToListAsync();
+            if (count != null && count > result.Count)
+                return result.Take(count!.Value).ToList();
+            return result;
+        }
     }
 }

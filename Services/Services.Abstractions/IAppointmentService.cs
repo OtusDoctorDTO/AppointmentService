@@ -1,4 +1,5 @@
 using HelpersDTO.AppointmentDto.DTO;
+using HelpersDTO.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -43,5 +44,12 @@ namespace Services.Abstractions
         /// </summary>
         /// <param name="id">Идентификатор</param>
         Task<bool> DeleteAsync(Guid id);
+
+        /// <summary>
+        /// Получить список записей по параметрам
+        /// </summary>
+        /// <param name="register"></param>
+        /// <returns></returns>
+        Task<List<ShortAppointnmentDTO>?> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters);
     }
 }

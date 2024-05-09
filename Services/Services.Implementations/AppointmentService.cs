@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using HelpersDTO.AppointmentDto.DTO;
+using HelpersDTO.Authentication;
 using Services.Abstractions;
 
 using Services.Implementations.Mapping;
@@ -75,6 +76,11 @@ namespace Services.Implementations
         public async Task<bool> DeleteAsync(Guid id)
         {
            return await _repository.DeleteAsync(id);
+        }
+
+        public async Task<List<ShortAppointnmentDTO>?> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters)
+        {
+            return await _repository.GetByParametersAsync(parameters);
         }
     }
 }

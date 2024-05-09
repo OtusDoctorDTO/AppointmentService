@@ -16,5 +16,6 @@ namespace Services.Repositories.Abstractions
         Task<bool> DeleteAsync(Guid id);
         Task<bool> UpdateAsync(Appointment appointment);
         Task<List<Appointment>> GetAllAsync();
+        Task<List<Appointment>> GetByParametersAsync(DateTime? sinceDate = null, DateTime? forDate = null, int[] statuses = null, int? count = null);
     }
 }
