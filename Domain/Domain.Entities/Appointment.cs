@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
@@ -7,6 +8,7 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор
         /// </summary>
+        [Key]
         public Guid Id { get; set; }
 
         /// <summary>
@@ -34,12 +36,8 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор пациента
         /// </summary>
-        public Guid PatientId { get; set; }
+        public Guid? PatientId { get; set; }
         
-        /// <summary>
-        /// Идентификатор пациента
-        /// </summary>
-        public Guid AppointmentId { get; set; }
         /// <summary>
         /// Удалена
         /// </summary>

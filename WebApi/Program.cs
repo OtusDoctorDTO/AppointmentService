@@ -1,8 +1,10 @@
+using Domain.Entities;
 using Infrastructure.EntityFramework;
 using Infrastructure.Repositories.Implementations;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ using System.Linq;
 using System.Transactions;
 using WebApi.Configs;
 using WebApi.Consumers;
+using static MassTransit.MessageHeaders;
 
 namespace WebApi
 {
@@ -81,6 +84,8 @@ namespace WebApi
                 });
             });
 
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -94,15 +99,11 @@ namespace WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
             app.MapControllers();
 
             app.Run();
-
-            // валидация данных
-            // статус подтвержден
         }
     }
 }

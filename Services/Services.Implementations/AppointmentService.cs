@@ -7,6 +7,7 @@ using Services.Implementations.Mapping;
 using Services.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Services.Implementations
@@ -80,7 +81,8 @@ namespace Services.Implementations
 
         public async Task<List<ShortAppointnmentDTO>?> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters)
         {
-            return await _repository.GetByParametersAsync(parameters);
+            var appointnmentsDB = await _repository.GetByParametersAsync(parameters.SinceDate, parameters.ForDate, parameters.Statuses, parameters.Count);
+            return appointnmentsDB.Select(app=> app.ToShortAppointnmentDTO()).ToList();
         }
     }
 }
