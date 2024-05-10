@@ -76,13 +76,13 @@ namespace Services.Implementations
         /// <param name="id">идентификатор</param>
         public async Task<bool> DeleteAsync(Guid id)
         {
-           return await _repository.DeleteAsync(id);
+            return await _repository.DeleteAsync(id);
         }
 
-        public async Task<List<ShortAppointnmentDTO>?> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters)
+        public async Task<List<ShortAppointnmentDTO>> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters)
         {
             var appointnmentsDB = await _repository.GetByParametersAsync(parameters.SinceDate, parameters.ForDate, parameters.Statuses, parameters.Count);
-            return appointnmentsDB.Select(app=> app.ToShortAppointnmentDTO()).ToList();
+            return appointnmentsDB.Select(app => app.ToShortAppointnmentDTO()).ToList();
         }
     }
 }

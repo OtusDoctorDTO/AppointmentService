@@ -93,7 +93,7 @@ namespace Infrastructure.Repositories.Implementations
         /// <param name="statuses">Список нужных статусов</param>
         /// <param name="count">кол-во</param>
         /// <returns></returns>
-        public async Task<List<Appointment>?> GetByParametersAsync(
+        public async Task<List<Appointment>> GetByParametersAsync(
             DateTime? sinceDate = null,
             DateTime? forDate = null,
             int[] statuses = null,

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Domain.Entities
 {
@@ -19,15 +18,6 @@ namespace Domain.Entities
         };
 
         // создать несколько дефолтных записей для теста
-        public static List<Appointment> All = new List<Appointment>()
-        {
-            new()
-            {
-                Price = 3000,
-
-            },
-        };
-
         public static Appointment[] CreateDefaultAppoiments()
         {
             var result = new List<Appointment>(weekCount * dayCount);

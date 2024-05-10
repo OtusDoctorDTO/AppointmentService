@@ -50,6 +50,6 @@ namespace Services.Abstractions
         /// </summary>
         /// <param name="register"></param>
         /// <returns></returns>
-        Task<List<ShortAppointnmentDTO>?> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters);
+        Task<List<ShortAppointnmentDTO>> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters);
     }
 }
