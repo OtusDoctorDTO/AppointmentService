@@ -81,6 +81,8 @@ namespace WebApi
                 });
             });
 
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -94,15 +96,11 @@ namespace WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
             app.MapControllers();
 
             app.Run();
-
-            // валидация данных
-            // статус подтвержден
         }
     }
 }

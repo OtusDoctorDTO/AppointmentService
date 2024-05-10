@@ -11,5 +11,10 @@ namespace Infrastructure.EntityFramework
         }
 
         public DbSet<Appointment> Appointments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Appointment>().HasData(Constants.CreateDefaultAppoiments());
+        }
     }
 }

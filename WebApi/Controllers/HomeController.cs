@@ -1,5 +1,7 @@
 ﻿using HelpersDTO.AppointmentDto.DTO;
+using HelpersDTO.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Services.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -9,13 +11,32 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppointmentController : ControllerBase
+    public class HomeController : ControllerBase
     {
         private readonly IAppointmentService _appointmentService;
-        public AppointmentController(IAppointmentService appointmentService)
+        private readonly ILogger<HomeController> _logger;
+        public HomeController(
+            IAppointmentService appointmentService,
+            ILogger<HomeController> logger)
         {
             _appointmentService = appointmentService;
+            _logger = logger;
         }
+
+        [HttpPost("GetAppointments")]
+        public async Task<IActionResult> GetAppointmentsAsync(ShortAppointmentRequest request)
+        {
+            try
+            {
+                return Ok(await _appointmentService.GetAppointmentsByParametersAsync(request));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Произошла ошибка в GetAppointments");
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("GetPaged")]
         public async Task<IEnumerable<AppointmentDto>> AppointmentList(int page, int pageSize)
         {
@@ -31,12 +52,13 @@ namespace WebApi.Controllers
         {
             await _appointmentService.CreateAsync(appointment);
         }
-        [HttpPut("updateAppointment")]
+        [HttpPut("UpdateAppointment")]
         public async Task UpdateAppointment(Guid id, UpdatingAppointmentDto appointment)
         {
             await _appointmentService.UpdateAsync(id, appointment);
         }
-        [HttpDelete("deleteAppointment")]
+
+        [HttpDelete("DeleteAppointment")]
         public async Task<bool> DeleteAppointment(Guid id)
         {
             try
@@ -44,9 +66,9 @@ namespace WebApi.Controllers
                 await _appointmentService.DeleteAsync(id);
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Логи
+                _logger.LogError("Произошла ошибка {message}", e);
             }
             return false;
         }

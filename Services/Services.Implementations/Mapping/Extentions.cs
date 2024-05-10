@@ -9,66 +9,66 @@ namespace Services.Implementations.Mapping
 {
     public static class Extentions
     {
-        public static List<AppointmentDto> ToAppointmentsDto(this List<Appointment> Appointments)
+        public static List<AppointmentDto> ToAppointmentsDto(this List<Appointment> appointments)
         {
-            return Appointments.Select(p => p.ToAppointmentDto()).ToList();
+            return appointments.Select(p => p.ToAppointmentDto()).ToList();
         }
 
-        public static AppointmentDto ToAppointmentDto(this Appointment Appointment)
+        public static AppointmentDto ToAppointmentDto(this Appointment appointment)
         {
-            if(Appointment == null) return null;
+            if (appointment == null) return null;
             return new AppointmentDto()
             {
-                Id = Appointment.Id,
-                Price = Appointment.Price,
-                CreateDate = Appointment.CreateDate,
-                Duration = Appointment.Duration,
-                Time = Appointment.Time,
-                DoctorId = Appointment.DoctorId,
-                PatientId = Appointment.PatientId,
-                Status = Appointment.Status.GetDescription()
+                Id = appointment.Id,
+                Price = appointment.Price,
+                CreateDate = appointment.CreateDate,
+                Duration = appointment.Duration,
+                Time = appointment.Time,
+                DoctorId = appointment.DoctorId,
+                PatientId = appointment.PatientId,
+                Status = appointment.Status.GetDescription()
             };
         }
 
-        
-        public static Appointment ToAppointment(this CreatingAppointmentDto Appointment)
+
+        public static Appointment ToAppointment(this CreatingAppointmentDto appointment)
         {
-            if (Appointment == null) return null;
+            if (appointment == null) return null;
             return new Appointment()
             {
-                Price = Appointment.Price,
-                Time = Appointment.Time,
-                DoctorId = Appointment.DoctorId,
-                PatientId = Appointment.PatientId
+                Price = appointment.Price,
+                Time = appointment.Time,
+                DoctorId = appointment.DoctorId,
+                PatientId = appointment.PatientId
             };
         }
-        public static Appointment ToAppointment(this AppointmentDto Appointment)
+        public static Appointment ToAppointment(this AppointmentDto appointment)
         {
-            if (Appointment == null) return null;
+            if (appointment == null) return null;
             return new Appointment()
             {
-                Id = Appointment.Id,
-                Price = Appointment.Price,
-                CreateDate = Appointment.CreateDate,
-                Duration = Appointment.Duration,
-                Time = Appointment.Time,
-                DoctorId = Appointment.DoctorId,
-                PatientId = Appointment.PatientId,
-                Status = (int)Appointment.Status.ParseEnum<RelevanceStatusEnum>()
+                Id = appointment.Id,
+                Price = appointment.Price,
+                CreateDate = appointment.CreateDate,
+                Duration = appointment.Duration,
+                Time = appointment.Time,
+                DoctorId = appointment.DoctorId,
+                PatientId = appointment.PatientId,
+                Status = (int)appointment.Status.ParseEnum<RelevanceStatusEnum>()
             };
         }
 
-        public static Appointment ToAppointment(this UpdatingAppointmentDto Appointment)
+        public static Appointment ToAppointment(this UpdatingAppointmentDto appointment)
         {
-            if (Appointment == null) return null;
+            if (appointment == null) return null;
             return new Appointment()
             {
-                Id = Appointment.Id,
-                Price = Appointment.Price,
-                Time = Appointment.Time,
-                DoctorId = Appointment.DoctorId,
-                PatientId = Appointment.PatientId,
-                Status = (int)Appointment.Status
+                Id = appointment.Id,
+                Price = appointment.Price,
+                Time = appointment.Time,
+                DoctorId = appointment.DoctorId,
+                PatientId = appointment.PatientId,
+                Status = (int)appointment.Status
             };
         }
 
@@ -96,6 +96,18 @@ namespace Services.Implementations.Mapping
         public static T ParseEnum<T>(this string value)
         {
             return (T)Enum.Parse(typeof(T), value, true);
+        }
+
+        public static ShortAppointnmentDTO ToShortAppointnmentDTO(this Appointment appointment)
+        {
+            if (appointment == null) return null;
+            return new ShortAppointnmentDTO()
+            {
+                DoctorId = appointment.DoctorId,
+                Id = appointment.Id,
+                Price = appointment.Price,
+                StartDate = appointment.Time
+            };
         }
     }
 }

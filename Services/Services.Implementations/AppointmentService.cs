@@ -1,11 +1,13 @@
 ﻿using Domain.Entities;
 using HelpersDTO.AppointmentDto.DTO;
+using HelpersDTO.Authentication;
 using Services.Abstractions;
 
 using Services.Implementations.Mapping;
 using Services.Repositories.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Services.Implementations
@@ -74,7 +76,13 @@ namespace Services.Implementations
         /// <param name="id">идентификатор</param>
         public async Task<bool> DeleteAsync(Guid id)
         {
-           return await _repository.DeleteAsync(id);
+            return await _repository.DeleteAsync(id);
+        }
+
+        public async Task<List<ShortAppointnmentDTO>> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters)
+        {
+            var appointnmentsDB = await _repository.GetByParametersAsync(parameters.SinceDate, parameters.ForDate, parameters.Statuses, parameters.Count);
+            return appointnmentsDB.Select(app => app.ToShortAppointnmentDTO()).ToList();
         }
     }
 }
