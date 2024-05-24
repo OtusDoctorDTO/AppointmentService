@@ -24,11 +24,12 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("GetAppointments")]
-        public async Task<IActionResult> GetAppointmentsAsync(ShortAppointmentRequest request)
+        public async Task<ActionResult<IEnumerable<ShortAppointnmentDTO>>> GetAppointmentsAsync(ShortAppointmentRequest request)
         {
             try
             {
-                return Ok(await _appointmentService.GetAppointmentsByParametersAsync(request));
+                var apps = await _appointmentService.GetAppointmentsByParametersAsync(request);
+                return Ok(apps);
             }
             catch (Exception e)
             {
