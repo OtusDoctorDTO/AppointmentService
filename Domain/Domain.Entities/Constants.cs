@@ -34,7 +34,7 @@ namespace Domain.Entities
                             Price = j * 1000,
                             CreateDate = DateTime.Now,
                             Duration = duration,
-                            Time = DateTime.Today.AddDays(j).AddHours(9).AddMinutes(j * duration),
+                            Time = DateTime.Today.AddDays(j).AddHours(9).AddMinutes(j * i * duration),
                             DoctorId = doctorId,
                             PatientId = null,
                             IsDeleted = false,
