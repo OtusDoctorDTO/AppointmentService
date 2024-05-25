@@ -24,11 +24,12 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("GetAppointments")]
-        public async Task<IActionResult> GetAppointmentsAsync(ShortAppointmentRequest request)
+        public async Task<ActionResult<IEnumerable<ShortAppointnmentDTO>>> GetAppointmentsAsync(ShortAppointmentRequest request)
         {
             try
             {
-                return Ok(await _appointmentService.GetAppointmentsByParametersAsync(request));
+                var apps = await _appointmentService.GetAppointmentsByParametersAsync(request);
+                return Ok(apps);
             }
             catch (Exception e)
             {
@@ -71,6 +72,21 @@ namespace WebApi.Controllers
                 _logger.LogError("Произошла ошибка {message}", e);
             }
             return false;
+        }
+
+        [HttpPost("UpdateStatus")]
+        public async Task<ActionResult<bool>> UpdateStatusAppointment(UpdateStatusAppointmentDto appointmentDto)
+        {
+            try
+            {
+                var result = await _appointmentService.UpdateStatusAsync(appointmentDto);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Произошла ошибка в GetAppointments");
+                return BadRequest(e.Message);
+            }
         }
     }
 }

@@ -106,7 +106,8 @@ namespace Services.Implementations.Mapping
                 DoctorId = appointment.DoctorId,
                 Id = appointment.Id,
                 Price = appointment.Price,
-                StartDate = appointment.Time
+                Date = new DateOnly(appointment.Time.Year, appointment.Time.Month, appointment.Time.Day),
+                Time = new TimeOnly(appointment.Time.Hour, appointment.Time.Minute)
             };
         }
     }

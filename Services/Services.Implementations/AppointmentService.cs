@@ -84,5 +84,17 @@ namespace Services.Implementations
             var appointnmentsDB = await _repository.GetByParametersAsync(parameters.SinceDate, parameters.ForDate, parameters.Statuses, parameters.Count);
             return appointnmentsDB.Select(app => app.ToShortAppointnmentDTO()).ToList();
         }
+
+        public async Task<bool> UpdateStatusAsync(UpdateStatusAppointmentDto appointmentDto)
+        {
+            var app = await _repository.GetByIdAsync(appointmentDto.Id);
+            if (app != null)
+            {
+                app.Status = appointmentDto.Status;
+                app.PatientId = appointmentDto.PatientId;
+                return await _repository.UpdateAsync(app);
+            }
+            return false;
+        }
     }
 }
