@@ -1,5 +1,6 @@
 ﻿using HelpersDTO.AppointmentDto.DTO;
 using HelpersDTO.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Abstractions;
@@ -72,6 +73,21 @@ namespace WebApi.Controllers
                 _logger.LogError("Произошла ошибка {message}", e);
             }
             return false;
+        }
+
+        [HttpPost("UpdateStatus")]
+        public async Task<ActionResult<bool>> UpdateStatusAppointment(UpdateStatusAppointmentDto appointmentDto)
+        {
+            try
+            {
+                var result = await _appointmentService.UpdateStatusAsync(appointmentDto);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Произошла ошибка в GetAppointments");
+                return BadRequest(e.Message);
+            }
         }
     }
 }
