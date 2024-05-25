@@ -88,7 +88,7 @@ namespace Services.Implementations
         public async Task<bool> UpdateStatusAsync(UpdateStatusAppointmentDto appointmentDto)
         {
             var app = await _repository.GetByIdAsync(appointmentDto.Id);
-            if(app != null)
+            if (app != null)
             {
                 app.Status = appointmentDto.Status;
                 app.PatientId = appointmentDto.PatientId;

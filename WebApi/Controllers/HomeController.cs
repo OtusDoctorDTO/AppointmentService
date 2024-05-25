@@ -1,6 +1,5 @@
 ﻿using HelpersDTO.AppointmentDto.DTO;
 using HelpersDTO.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Abstractions;
