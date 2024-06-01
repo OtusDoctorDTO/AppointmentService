@@ -38,7 +38,7 @@ namespace Domain.Entities
                             DoctorId = doctorId,
                             PatientId = null,
                             IsDeleted = false,
-                            Status = (int)StatusEnum.Free
+                            Status = (int)HelpersDTO.AppointmentDto.Enums.StatusEnum.Free
                         }); ;
                     }
                 }
