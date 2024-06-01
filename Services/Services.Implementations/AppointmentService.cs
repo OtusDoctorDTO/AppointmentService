@@ -91,7 +91,8 @@ namespace Services.Implementations
             if (app != null)
             {
                 app.Status = appointmentDto.Status;
-                app.PatientId = appointmentDto.PatientId;
+                if(appointmentDto.PatientId != null)
+                    app.PatientId = appointmentDto.PatientId;
                 return await _repository.UpdateAsync(app);
             }
             return false;
