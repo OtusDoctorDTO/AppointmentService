@@ -44,10 +44,20 @@ namespace WebApi.Controllers
             return await _appointmentService.GetPagedAsync(page, pageSize);
         }
         [HttpGet("GetAppointmentbyId")]
-        public async Task<AppointmentDto> GetAppointmentById(Guid id)
+        public async Task<ActionResult<AppointmentDto>> GetAppointmentById(Guid id)
         {
-            return await _appointmentService.GetByIdAsync(id);
+            try
+            {
+                var app = await _appointmentService.GetByIdAsync(id);
+                return Ok(app);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Произошла ошибка в GetAppointments");
+                return BadRequest(e.Message);
+            }
         }
+
         [HttpPost("AddAppointment")]
         public async Task AddAppointment(CreatingAppointmentDto appointment)
         {

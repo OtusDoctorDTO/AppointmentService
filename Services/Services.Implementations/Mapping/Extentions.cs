@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using HelpersDTO.AppointmentDto.Enums;
 
 namespace Services.Implementations.Mapping
 {
@@ -107,7 +108,9 @@ namespace Services.Implementations.Mapping
                 Id = appointment.Id,
                 Price = appointment.Price,
                 Date = new DateOnly(appointment.Time.Year, appointment.Time.Month, appointment.Time.Day),
-                Time = new TimeOnly(appointment.Time.Hour, appointment.Time.Minute)
+                Time = new TimeOnly(appointment.Time.Hour, appointment.Time.Minute),
+                PatientId = appointment.PatientId,
+                Status = ((StatusEnum)appointment.Status).GetDescription()
             };
         }
     }
