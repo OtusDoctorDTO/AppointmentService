@@ -105,7 +105,7 @@ namespace Infrastructure.Repositories.Implementations
             ((statuses == null || !statuses.Any()) || statuses.Contains(appointment.Status)))
                 .OrderByDescending(x => x.CreateDate)
                 .ToListAsync();
-            if (count != null && count > result.Count)
+            if (count != null && count < result.Count)
                 return result.Take(count!.Value).ToList();
             return result;
         }
