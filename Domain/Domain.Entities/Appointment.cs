@@ -32,7 +32,7 @@ namespace Domain.Entities
         /// <summary>
         /// Идентификатор врача
         /// </summary>
-        public Guid DoctorId { get; set; }
+        public Guid? DoctorId { get; set; }
         /// <summary>
         /// Идентификатор пациента
         /// </summary>

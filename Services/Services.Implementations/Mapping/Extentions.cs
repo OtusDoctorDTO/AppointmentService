@@ -22,9 +22,9 @@ namespace Services.Implementations.Mapping
             {
                 Id = appointment.Id,
                 Price = appointment.Price,
-                CreateDate = appointment.CreateDate,
+                Date = new DateOnly(appointment.CreateDate.Year, appointment.CreateDate.Month, appointment.CreateDate.Day),
                 Duration = appointment.Duration,
-                Time = appointment.Time,
+                Time = new TimeOnly(appointment.Time.Hour, appointment.Time.Minute),
                 DoctorId = appointment.DoctorId,
                 PatientId = appointment.PatientId,
                 Status = ((StatusEnum)appointment.Status).GetDescription()
@@ -50,9 +50,11 @@ namespace Services.Implementations.Mapping
             {
                 Id = appointment.Id,
                 Price = appointment.Price,
-                CreateDate = appointment.CreateDate,
+                //CreateDate
                 Duration = appointment.Duration,
-                Time = appointment.Time,
+                Time = new DateTime
+                (appointment.Date.Year, appointment.Date.Month, appointment.Date.Day, 
+                appointment.Time.Hour, appointment.Time.Minute, appointment.Time.Second),
                 DoctorId = appointment.DoctorId,
                 PatientId = appointment.PatientId,
                 Status = (int)appointment.Status.ParseEnum<RelevanceStatusEnum>()
