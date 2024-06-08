@@ -27,7 +27,7 @@ namespace Services.Implementations.Mapping
                 Time = appointment.Time,
                 DoctorId = appointment.DoctorId,
                 PatientId = appointment.PatientId,
-                Status = appointment.Status.GetDescription()
+                Status = ((StatusEnum)appointment.Status).GetDescription()
             };
         }
 
