@@ -98,5 +98,61 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost("BookAppointment")]
+        public async Task<IActionResult> BookAppointment([FromBody] AppointmentDto appointmentDto)
+        {
+            if (appointmentDto == null)
+            {
+                return BadRequest("Invalid appointment data.");
+            }
+
+            try
+            {
+                var result = await _appointmentService.BookAppointmentAsync(appointmentDto);
+                if (result)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return StatusCode(500, "Failed to book appointment.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error occurred while booking appointment: {ex.Message}");
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+        [HttpGet("GetByPatientId")]
+        public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetByPatientIdAsync(Guid patientId)
+        {
+            try
+            {
+                var appointments = await _appointmentService.GetByPatientIdAsync(patientId);
+                return Ok(appointments);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred in GetByPatientIdAsync");
+                return BadRequest(e.Message);
+            }
+        }
+        [HttpGet("GetAppointmentsByDoctorId")]
+        public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAppointmentsByDoctorIdAsync(Guid doctorId)
+        {
+            try
+            {
+                var appointments = await _appointmentService.GetAppointmentsByDoctorIdAsync(doctorId);
+                return Ok(appointments);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "An error occurred in GetByPatientIdAsync");
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

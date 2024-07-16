@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using HelpersDTO.AppointmentDto.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,5 +18,8 @@ namespace Services.Repositories.Abstractions
         Task<bool> UpdateAsync(Appointment appointment);
         Task<List<Appointment>> GetAllAsync();
         Task<List<Appointment>> GetByParametersAsync(DateTime? sinceDate = null, DateTime? forDate = null, int[] statuses = null, int? count = null);
+        Task<IEnumerable<Appointment>> GetByPatientIdAsync(Guid patientId);
+
+        Task<List<Appointment>> GetAppointmentsByDoctorIdAsync(Guid doctorId);
     }
 }
