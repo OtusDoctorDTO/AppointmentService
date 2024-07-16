@@ -91,11 +91,50 @@ namespace Services.Implementations
             if (app != null)
             {
                 app.Status = appointmentDto.Status;
-                if(appointmentDto.PatientId != null)
+                if (appointmentDto.PatientId != null)
                     app.PatientId = appointmentDto.PatientId;
                 return await _repository.UpdateAsync(app);
             }
             return false;
+        }
+
+        public async Task<bool> BookAppointmentAsync(AppointmentDto appointmentDto)
+        {
+            try
+            {
+                var appointment = appointmentDto.ToAppointment();
+                var result = await _repository.CreateAsync(appointment);
+                return result != Guid.Empty;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        public async Task<List<AppointmentDto>> GetByPatientIdAsync(Guid patientId)
+        {
+            try
+            {
+                var appointments = await _repository.GetByPatientIdAsync(patientId);
+                return appointments.Select(a => a.ToAppointmentDto()).ToList();
+            }
+            catch (Exception e)
+            {
+                return new List<AppointmentDto>();
+            }
+        }
+
+        public async Task<List<AppointmentDto>> GetAppointmentsByDoctorIdAsync(Guid doctorId)
+        {
+            var appointments = await _repository.GetAppointmentsByDoctorIdAsync(doctorId);
+            return appointments.Select(a => new AppointmentDto
+            {
+                Id = a.Id,
+                DoctorId = a.DoctorId,
+                Date = DateOnly.FromDateTime(a.CreateDate),
+                Time = TimeOnly.FromDateTime(a.Time),
+                Status = a.Status.ToString()
+            }).ToList();
         }
     }
 }

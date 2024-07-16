@@ -1,3 +1,4 @@
+using Domain.Entities;
 using HelpersDTO.AppointmentDto.DTO;
 using HelpersDTO.Authentication;
 using System;
@@ -52,5 +53,8 @@ namespace Services.Abstractions
         /// <returns></returns>
         Task<List<ShortAppointnmentDTO>> GetAppointmentsByParametersAsync(ShortAppointmentRequest parameters);
         Task<bool> UpdateStatusAsync(UpdateStatusAppointmentDto appointmentDto);
+        Task<bool> BookAppointmentAsync(AppointmentDto appointmentDto);
+        Task<List<AppointmentDto>> GetByPatientIdAsync(Guid patientId);
+        Task<List<AppointmentDto>> GetAppointmentsByDoctorIdAsync(Guid doctorId);
     }
 }

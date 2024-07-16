@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using HelpersDTO.AppointmentDto.DTO;
 using Infrastructure.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Services.Repositories.Abstractions;
@@ -108,6 +109,18 @@ namespace Infrastructure.Repositories.Implementations
             if (count != null && count < result.Count)
                 return result.Take(count!.Value).ToList();
             return result;
+        }
+
+        public async Task<IEnumerable<Appointment>> GetByPatientIdAsync(Guid patientId)
+        {
+            return await _context.Appointments.Where(a => a.PatientId == patientId).ToListAsync();
+        }
+
+        public async Task<List<Appointment>> GetAppointmentsByDoctorIdAsync(Guid doctorId)
+        {
+            return await _context.Appointments
+            .Where(a => a.DoctorId == doctorId)
+            .ToListAsync();
         }
     }
 }

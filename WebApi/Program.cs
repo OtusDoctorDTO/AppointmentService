@@ -1,3 +1,4 @@
+using HelpersDTO.AppointmentDto.DTO;
 using Infrastructure.EntityFramework;
 using Infrastructure.Repositories.Implementations;
 using MassTransit;
@@ -58,7 +59,6 @@ namespace WebApi
             {
                 x.AddConsumer<AppointmentConsumer>();
 
-
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host(receptionConfig.BusConfig.Host, receptionConfig.BusConfig.Port, receptionConfig.BusConfig.Path, h =>
@@ -81,8 +81,6 @@ namespace WebApi
                 });
             });
 
-
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -96,6 +94,7 @@ namespace WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
             }
             app.UseHttpsRedirection();
+
             app.UseAuthorization();
 
             app.MapControllers();
